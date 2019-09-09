@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-3.2.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+<!--    &lt;!&ndash; 配置处理器映射器,springmvc默认的处理器映射器-->
+<!--    BeanNameUrlHandlerMapping：根据bean(自定义Controler)的name属性的url去寻找hanler(Action:Controller)-->
+<!--     &ndash;&gt;-->
+<!--    <bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping"/>-->
+
+<!--    &lt;!&ndash; 配置处理器适配器执行Controlelr ,springmvc默认的-->
+<!--    SimpleControllerHandlerAdapter:执行Controller-->
+<!--    &ndash;&gt;-->
+<!--    <bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter"/>-->
+
+<!--    &lt;!&ndash; 配置自定义Controler &ndash;&gt;-->
+<!--    <bean name="/items1.action" id="itemList" class="com.cn.controller.ItemList"/>-->
+
+<!--    &lt;!&ndash; 配置sprigmvc视图解析器：解析逻辑试图 	 后台返回逻辑试图：index-->
+<!--    视图解析器解析出真正物理视图：前缀+逻辑试图+后缀====/WEB-INF/jsps/index.jsp&ndash;&gt;-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+<!--    &lt;!&ndash; 简单url映射&ndash;&gt;-->
+<!--    <bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">-->
+<!--        <property name="mappings">-->
+<!--            <props>-->
+<!--                <prop key="/items11.action">itemList</prop>-->
+<!--                <prop key="/items12.action">itemList</prop>-->
+<!--            </props>-->
+<!--        </property>-->
+<!--    </bean>-->
+
+
+<!--    <bean class="org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter"/>-->
+
+<!--    <bean name="/items21.action" id="itemList21" class="com.cn.controller.ItemList2"/>-->
+
+
+    <!-- 扫描controller注解,多个包中间使用半角逗号分隔 -->
+    <context:component-scan base-package="com.cn.controller"/>
+
+    <!--注解映射器 -->
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/>
+
+    <!--注解适配器 -->
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"/>
+    <!--<mvc:annotation-driven>替代注解处理器和适配器的配置 -->
+<!--    <mvc:annotation-driven></mvc:annotation-driven>-->
+</beans>
